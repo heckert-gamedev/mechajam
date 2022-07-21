@@ -7,12 +7,12 @@
             "actions": [
                 {
                     "name": "MoveFocus",
-                    "type": "PassThrough",
+                    "type": "Value",
                     "id": "98fb9129-bbb4-4fe7-94e5-03cb3604c3f6",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
