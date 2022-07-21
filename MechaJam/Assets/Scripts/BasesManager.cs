@@ -11,9 +11,12 @@ namespace jam
         Vector2 _currentSelection = Vector3.zero;
         [SerializeField] float spacing = 32f;
 
+        bool isPaused = true;
+
         AutomaticTurntable _currentTurntable;
 
         public AutomaticTurntable CurrentTurntable { get => _currentTurntable; set => _currentTurntable = value; }
+        public bool IsPaused { get => isPaused; set => ActivateDeactivatePauseMode(value); }
 
         void Start()
         {
@@ -27,7 +30,7 @@ namespace jam
                 }
             }
             _currentTurntable = exhibits[0];
-            _currentTurntable.IsTurning = true;
+            _currentTurntable.IsTurning = !isPaused;
         }
 
         internal bool GetTargetPosition(Vector3 otherPosition, Vector2 moveInput, out Vector3 targetPosition)
@@ -53,6 +56,20 @@ namespace jam
             }
             targetPosition = Vector3.zero;
             return false;
+        }
+
+        void ActivateDeactivatePauseMode(bool value)
+        {
+            isPaused = value;
+            if (isPaused)
+            {
+                _currentTurntable.IsTurning = false;
+            }
+            else
+            {
+                _currentTurntable.IsTurning = true;
+            }
+
         }
 
     }

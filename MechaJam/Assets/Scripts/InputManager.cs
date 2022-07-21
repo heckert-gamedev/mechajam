@@ -60,5 +60,33 @@ namespace jam
             }
         }
 
+        public void OnEnterStore(InputValue value)
+        {
+            _bm.IsPaused = false;
+
+        }
+
+        public void OnCancelPurchase(InputValue value)
+        {
+            _bm.IsPaused = true;
+
+        }
+
+        public void OnConfirmPurchase(InputValue value)
+        {
+            _bm.IsPaused = true;
+
+        }
+
+
+        public void OnQuit(InputValue value)
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
+        }
+
     }
 }
