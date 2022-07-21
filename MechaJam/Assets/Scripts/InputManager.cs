@@ -27,6 +27,9 @@ namespace jam
 
         void Start()
         {
+            _StartOverlay.enabled = true;
+            _ShoppingOverlay.enabled = false;
+            _PurchasedOverlay.enabled = false;
         }
 
         // Update is called once per frame
@@ -67,19 +70,22 @@ namespace jam
         public void OnEnterStore(InputValue value)
         {
             _bm.IsPaused = false;
-
+            _StartOverlay.enabled = false;
+            _ShoppingOverlay.enabled = true;
         }
 
         public void OnCancelPurchase(InputValue value)
         {
             _bm.IsPaused = true;
-
+            _StartOverlay.enabled = true;
+            _ShoppingOverlay.enabled = false;
         }
 
         public void OnConfirmPurchase(InputValue value)
         {
             _bm.IsPaused = true;
-
+            _ShoppingOverlay.enabled = false;
+            _PurchasedOverlay.enabled = true;
         }
 
 
