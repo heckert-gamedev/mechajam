@@ -20,6 +20,8 @@ namespace jam
         bool isCoolingDown = false;
         float _cooldown;
 
+        bool hasPurchased = false;
+
         private void Awake()
         {
             _inputs = GetComponent<PlayerInput>();
@@ -35,7 +37,7 @@ namespace jam
         // Update is called once per frame
         void Update()
         {
-            if (!isCoolingDown)
+            if (hasPurchased || !isCoolingDown)
             {
                 return;
             }
@@ -49,6 +51,11 @@ namespace jam
 
         public void OnMoveFocus(InputValue value)
         {
+            if (hasPurchased || _bm.IsPaused)
+            {
+                return;
+            }
+
             if (!isCoolingDown)
             {
                 Vector2 v = value.Get<Vector2>();
@@ -69,6 +76,10 @@ namespace jam
 
         public void OnEnterStore(InputValue value)
         {
+            if (hasPurchased)
+            {
+                return;
+            }
             _bm.IsPaused = false;
             _StartOverlay.enabled = false;
             _ShoppingOverlay.enabled = true;
@@ -76,6 +87,10 @@ namespace jam
 
         public void OnCancelPurchase(InputValue value)
         {
+            if (hasPurchased)
+            {
+                return;
+            }
             _bm.IsPaused = true;
             _StartOverlay.enabled = true;
             _ShoppingOverlay.enabled = false;
@@ -83,6 +98,7 @@ namespace jam
 
         public void OnConfirmPurchase(InputValue value)
         {
+            hasPurchased = true;
             _bm.IsPaused = true;
             _ShoppingOverlay.enabled = false;
             _PurchasedOverlay.enabled = true;
