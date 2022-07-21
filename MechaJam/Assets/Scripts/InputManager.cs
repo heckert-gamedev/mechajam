@@ -8,6 +8,10 @@ namespace jam
     public class InputManager : MonoBehaviour
     {
 
+        [SerializeField] Canvas _StartOverlay;
+        [SerializeField] Canvas _ShoppingOverlay;
+        [SerializeField] Canvas _PurchasedOverlay;
+
         PlayerInput _inputs;
         [SerializeField] BasesManager _bm;
 
